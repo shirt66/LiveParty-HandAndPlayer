@@ -1,0 +1,16 @@
+{
+    "name": "liveparty.handandplayer.Editor",
+    "references": [
+        "GUID:f06555f75b070af458a003d92f9efb00",
+        "GUID:d2f7ee6ee7cb0c94288318bb7a5ea9f4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

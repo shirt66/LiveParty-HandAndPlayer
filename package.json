@@ -1,0 +1,18 @@
+{
+  "name": "com.liveparty.handandplayer",
+  "version": "1.1.0",
+  "displayName": "HandAndPlayer",
+  "description": "This is an example package",
+  "unity": "2019.4",
+  "unityRelease": "0b5",
+ "keywords": [
+    "hand",
+    "player"
+  ],
+  "author": {
+    "name": "GCY",
+    "email": "2256016049@qq.com",
+    "url": "https://www.unity3d.com"
+  }
+}
+
