@@ -29,16 +29,53 @@ public class HandController : MonoBehaviour
     #region 手牌容器的一些方法接口
 
     /// <summary>
-    /// 判断手牌是否在手牌容器中
+    /// 通过手牌名称获取手牌编号
+    /// </summary>
+    /// <param name="handName">手牌名称</param>
+    /// <returns>手牌编号，不在容器中返回-1</returns>
+    private int GetIndex(string handName)
+    {
+        for (int i = 0; i < handAssets.ToArray().Length; i++)
+        {
+            if (handAssets[i].name.Equals(handName))
+            {
+                return i;
+            }
+        }
+        //Debug.LogError("未在容器中找到名称为" + handName + "的卡牌");
+        return -1;
+    }
+
+    /// <summary>
+    /// 判断某一编号的手牌是否在手牌容器中
     /// </summary>
     /// <param name="handIndex">手牌编号</param>
     /// <returns></returns>
     private bool IsHandIn(int handIndex)
     {
         if (handAssets[handIndex] == null)
+        {
+            Debug.LogError("未在容器中找到编号为" + handIndex + "的卡牌");
             return false;
+        }
         else
             return true;
+    }
+
+    /// <summary>
+    /// 判断某一名称的手牌是否在手牌容器中
+    /// </summary>
+    /// <param name="handName">手牌名称</param>
+    /// <returns></returns>
+    private bool IsHandIn(string handName)
+    {
+        foreach(HandAsset handAsset in handAssets)
+        {
+            if (handAsset.name.Equals(handName))
+                return true;
+        }
+        Debug.LogError("未在容器中找到名称为" + handName + "的卡牌");
+        return false;
     }
 
     /// <summary>
@@ -166,17 +203,14 @@ public class HandController : MonoBehaviour
     #region 手牌玩家字典的一些方法接口
 
     /// <summary>
-    /// 将卡牌添加给玩家，一同存入字典中
+    /// 将指定编号的卡牌添加给玩家，一同存入字典中
     /// </summary>
     /// <param name="handIndex">卡牌在容器中的序号</param>
     /// <param name="playerIndex">玩家编号</param>
     public void AddHandToPlayer(int playerIndex, int handIndex)
     {
         if (!IsHandIn(handIndex))
-        {
-            Debug.LogError("未在容器中找到编号为"+ handIndex + "的卡牌");
             return;
-        }
         if(IsPlayerIn(playerIndex))
         {
             handAssetDictionary[playerIndex].Add(handIndex);
@@ -189,7 +223,32 @@ public class HandController : MonoBehaviour
     }
 
     /// <summary>
-    /// 将卡牌从玩家身上删除
+    /// 将指定名称的卡牌添加给玩家，一同存入字典中
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <param name="handName">卡牌名称</param>
+    public void AddHandToPlayer(int playerIndex,string handName)
+    {
+        if (!IsHandIn(handName))
+            return;
+        AddHandToPlayer(playerIndex, GetIndex(handName));
+    }
+
+    /// <summary>
+    /// 将一连串名称的卡牌添加给玩家，一同存入字典中
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <param name="handNames">卡牌的名称数组</param>
+    public void AddHandsToPlayer(int playerIndex,string[] handNames)
+    {
+        foreach(string handName in handNames)
+        {
+            AddHandToPlayer(playerIndex, handName);
+        }
+    }
+
+    /// <summary>
+    /// 将指定编号的卡牌从玩家身上删除
     /// </summary>
     /// <param name="handIndex">卡牌在容器中的序号</param>
     /// <param name="palyerIndex">玩家编号</param>
@@ -201,7 +260,36 @@ public class HandController : MonoBehaviour
             return;
         }
 
+        if (!IsHandIn(handIndex))
+            return;
+
         handAssetDictionary[playerIndex].Remove(handIndex);
+    }
+
+    /// <summary>
+    /// 将指定名称的卡牌从玩家身上删除
+    /// </summary>
+    /// <param name="handName">玩家名称</param>
+    /// <param name="playerIndex">卡牌编号</param>
+    public void RemoveHandFromPlayer(string handName,int playerIndex)
+    {
+        if (!IsHandIn(handName))
+            return;
+
+        RemoveHandFromPlayer(GetIndex(handName), playerIndex);
+    }
+
+    /// <summary>
+    /// 将一连串名称的卡牌从玩家身上删除
+    /// </summary>
+    /// <param name="handNames">卡牌名称数组</param>
+    /// <param name="playerIndex">玩家编号</param>
+    public void RemoveHandsFromPlayer(string[] handNames,int playerIndex)
+    {
+        foreach (string handName in handNames)
+        {
+            RemoveHandFromPlayer(handName, playerIndex);
+        }
     }
 
     /// <summary>
