@@ -15,9 +15,9 @@ using Sirenix.OdinInspector;
 //手牌类型的枚举
 public enum HandType
 {
-    movement,
-    equipment,
-    tool
+    Active,
+    Passive,
+    Special
 }
 
 

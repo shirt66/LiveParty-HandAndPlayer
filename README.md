@@ -24,6 +24,9 @@ HandController主要为对手牌HandAsset集中管理的一个脚本，其中主要括：
 容器handAssetDictionary：为Dictionary<int, List<int>>类型的字典容器，字典的Key代表玩家的编号，字典的Value代表该编号玩家目前拥有的所有手牌在容器中的编号(从0开始计)
 主要的接口方法：
 手牌容器的接口：
+GetHandType：获取手牌类型，有两个重载方法，可根据手牌编号或手牌名称获取
+GetHandDamage：获取手牌攻击力，有两个重载方法，可根据手牌编号或手牌名称获取
+GetHandDefense：获取手牌防御力，有两个重载方法，可根据手牌编号或手牌名称获取
 ShowHandInfo：根据传入手牌编号在游戏的UI界面显示对应编号的手牌信息，包括手牌名称，各属性值以及手牌描述，并返回对应信息UI的父物体
 SendAllToHandAssets：将工程文件中的所有HandAsset文件存入handAssets容器中，在挂载上的脚本Inspector界面有对应的调用按钮
 ClearAllInHandAssets：将handAssets容器中的所有HandAsset文件移除出容器，在挂载上的脚本Inspector界面有对应的调用按钮

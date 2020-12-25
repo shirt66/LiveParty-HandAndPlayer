@@ -87,6 +87,78 @@ public class HandController : MonoBehaviour
     }
 
     /// <summary>
+    /// 获取某一手牌编号对应手牌的手牌类型
+    /// </summary>
+    /// <param name="handIndex">手牌编号</param>
+    /// <returns>手牌类型</returns>
+    public HandType GetHandType(int handIndex)
+    {
+        if (!IsHandIn(handIndex))
+            return HandType.Active;
+        return handAssets[handIndex].handType;
+    }
+
+    /// <summary>
+    /// 获取某一手牌编号对应手牌的手牌类型
+    /// </summary>
+    /// <param name="handName">手牌名称</param>
+    /// <returns>手牌类型</returns>
+    public HandType GetHandType(string handName)
+    {
+        if (!IsHandIn(handName))
+            return HandType.Active;
+        return handAssets[GetIndex(handName)].handType;
+    }
+
+    /// <summary>
+    /// 获取某一手牌编号对应手牌的攻击力
+    /// </summary>
+    /// <param name="handIndex">手牌编号</param>
+    /// <returns>手牌攻击力</returns>
+    public int GetHandDamage(int handIndex)
+    {
+        if (!IsHandIn(handIndex))
+            return 0;
+        return handAssets[handIndex].damage;
+    }
+
+    /// <summary>
+    /// 获取某一手牌名称对应手牌的攻击力
+    /// </summary>
+    /// <param name="handName">手牌名称</param>
+    /// <returns>手牌攻击力</returns>
+    public int GetHandDamage(string handName)
+    {
+        if (!IsHandIn(handName))
+            return 0;
+        return handAssets[GetIndex(handName)].damage;
+    }
+
+    /// <summary>
+    /// 获取某一手牌编号对应手牌的防御力
+    /// </summary>
+    /// <param name="handIndex">手牌编号</param>
+    /// <returns>手牌防御力</returns>
+    public int GetHandDefense(int handIndex)
+    {
+        if (!IsHandIn(handIndex))
+            return 0;
+        return handAssets[handIndex].defense;
+    }
+
+    /// <summary>
+    /// 获取某一手牌名称对应手牌的防御力
+    /// </summary>
+    /// <param name="handName">手牌名称</param>
+    /// <returns>手牌防御力</returns>
+    public int GetHandDefense(string handName)
+    {
+        if (!IsHandIn(handName))
+            return 0;
+        return handAssets[GetIndex(handName)].defense;
+    }
+
+    /// <summary>
     /// 播放手牌的动画
     /// </summary>
     /// <param name="handIndex">卡牌在容器中的编号</param>
