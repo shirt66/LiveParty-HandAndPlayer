@@ -16,6 +16,14 @@ using System.Linq;
 public class HandController : MonoBehaviour
 {
 
+    private static HandController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
     [Header("所有配置手牌")]
     public List<HandAsset> handAssets;
 
@@ -315,7 +323,7 @@ public class HandController : MonoBehaviour
     /// </summary>
     /// <param name="playerIndex">玩家编号</param>
     /// <returns></returns>
-    private bool IsPlayerIn(int playerIndex)
+    public bool IsPlayerIn(int playerIndex)
     {
         return handAssetDictionary.ContainsKey(playerIndex);
     }

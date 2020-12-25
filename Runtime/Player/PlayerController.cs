@@ -11,6 +11,14 @@ using Sirenix.OdinInspector;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private static PlayerController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     [Header("当前游戏内所有玩家")]
     public List<Player> players;
 
@@ -31,30 +39,154 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// 判断某玩家编号是否存在
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns></returns>
+    bool isPlayerIn(int playerIndex)
+    {
+        if (players[playerIndex] == null)
+        {
+            Debug.LogError("未在容器中找到编号为" + playerIndex + "的玩家");
+            return false;
+        }
+        return true;
+    }
+
+    #region 玩家属性值相关的接口
+
+    /// <summary>
+    /// 通过玩家编号获取其力量值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns>力量值,若玩家不存在返回0</returns>
+    public int GetStrength(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return 0;
+        return players[playerIndex].strength;
+    }
+
+    /// <summary>
+    /// 通过玩家编号获取其敏捷值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns>敏捷值,若玩家不存在返回0</returns>
+    public int GetDexterity(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return 0;
+        return players[playerIndex].dexterity;
+    }
+
+    /// <summary>
+    /// 通过玩家编号获取其体格值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns>敏捷值,若玩家不存在返回0</returns>
+    public int GetConstitution(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return 0;
+        return players[playerIndex].constitution;
+    }
+
+    /// <summary>
+    /// 通过玩家编号获取其智力值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns>智力值,若玩家不存在返回0</returns>
+    public int GetIntelligence(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return 0;
+        return players[playerIndex].intelligence;
+    }
+
+    /// <summary>
+    /// 通过玩家编号获取其感知值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns>感知值,若玩家不存在返回0</returns>
+    public int GetWidom(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return 0;
+        return players[playerIndex].widom;
+    }
+
+    /// <summary>
+    /// 通过玩家编号获取其魅力值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    /// <returns>魅力值,若玩家不存在返回0</returns>
+    public int GetCharisma(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return 0;
+        return players[playerIndex].charisma;
+    }
+
+    /// <summary>
     /// 根据所有玩家的当前手牌改变所有玩家的属性数值
     /// </summary>
     public void ChangeAttributes()
     {
+        //HandController handController = FindObjectOfType<HandController>().GetComponent<HandController>();
+        //var playerHandDictionary = handController.handAssetDictionary;
+        //var handAssets = handController.handAssets;
+        //foreach (var playerHand in playerHandDictionary)
+        //{
+        //    foreach(var handIndex in playerHand.Value)
+        //    {
+        //        players[playerHand.Key].strength += handAssets[handIndex].strengthInfluence;
+        //        players[playerHand.Key].dexterity += handAssets[handIndex].dexterityInfluence;
+        //        players[playerHand.Key].constitution += handAssets[handIndex].constitutionInfluence;
+        //        players[playerHand.Key].intelligence += handAssets[handIndex].intelligenceInfluence;
+        //        players[playerHand.Key].widom += handAssets[handIndex].widomInfluence;
+        //        players[playerHand.Key].charisma += handAssets[handIndex].charismaInfluence;
+        //    }
+        //}
         HandController handController = FindObjectOfType<HandController>().GetComponent<HandController>();
         var playerHandDictionary = handController.handAssetDictionary;
-        var handAssets = handController.handAssets;
         foreach (var playerHand in playerHandDictionary)
         {
-            foreach(var handIndex in playerHand.Value)
-            {
-                players[playerHand.Key].strength += handAssets[handIndex].strengthInfluence;
-                players[playerHand.Key].dexterity += handAssets[handIndex].dexterityInfluence;
-                players[playerHand.Key].constitution += handAssets[handIndex].constitutionInfluence;
-                players[playerHand.Key].intelligence += handAssets[handIndex].intelligenceInfluence;
-                players[playerHand.Key].widom += handAssets[handIndex].widomInfluence;
-                players[playerHand.Key].charisma += handAssets[handIndex].charismaInfluence;
-            }
+            ChangeAttribute(playerHand.Key);
         }
     }
 
+    /// <summary>
+    /// 根据特定玩家编号的所有手牌改变其所有属性值
+    /// </summary>
+    /// <param name="playerIndex">玩家编号</param>
+    public void ChangeAttribute(int playerIndex)
+    {
+        if (!isPlayerIn(playerIndex))
+            return;
+
+        HandController handController = FindObjectOfType<HandController>().GetComponent<HandController>();
+        if (!handController.IsPlayerIn(playerIndex))
+        {
+            Debug.Log("编号为" + playerIndex + "的玩家目前没有手牌");
+            return;
+        }
+
+        List<int> handIndexs = handController.GetHandsOfPlayer(playerIndex);
+        foreach(int handIndex in handIndexs)
+        {
+            players[playerIndex].strength += handController.handAssets[handIndex].strengthInfluence;
+            players[playerIndex].dexterity += handController.handAssets[handIndex].dexterityInfluence;
+            players[playerIndex].constitution += handController.handAssets[handIndex].constitutionInfluence;
+            players[playerIndex].intelligence += handController.handAssets[handIndex].intelligenceInfluence;
+            players[playerIndex].widom += handController.handAssets[handIndex].widomInfluence;
+            players[playerIndex].charisma += handController.handAssets[handIndex].charismaInfluence;
+        }
+    }
+
+    #endregion 玩家属性值相关的接口
 
 
-    
+
 
 
 }

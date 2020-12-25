@@ -46,6 +46,13 @@ HideAllHandsMoedel：消除指定编号玩家的所有手牌模型
 playerPrefab：玩家预制体，主要由名为Player的父物体及其下的Camera子物体组成
 主要接口方法：
 CreatePlayer：根据玩家预制体创建玩家并存入容器中，不知道有没有用
+GetStrength：根据玩家编号获取其力量值
+GetDexterity：根据玩家编号获取其敏捷值
+GetConstitution：通过玩家编号获取其体格值
+GetIntelligence：通过玩家编号获取其智力值
+GetWidom：通过玩家编号获取其感知值
+GetCharisma：通过玩家编号获取其魅力值
+ChangeAttribute：根据特定玩家编号的所有手牌改变其所有属性值
 ChangeAttributes：根据玩家手上的手牌更新玩家的六维属性
 
 
