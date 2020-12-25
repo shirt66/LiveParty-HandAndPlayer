@@ -12,11 +12,11 @@ using Sirenix.OdinInspector;
 public class PlayerController : MonoBehaviour
 {
 
-    private static PlayerController instance;
+    private static PlayerController Instance;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     [Header("当前游戏内所有玩家")]

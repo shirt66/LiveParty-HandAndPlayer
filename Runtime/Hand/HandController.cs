@@ -16,11 +16,11 @@ using System.Linq;
 public class HandController : MonoBehaviour
 {
 
-    private static HandController instance;
+    public static HandController Instance;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
 
