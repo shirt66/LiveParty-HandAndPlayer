@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.Animations;
 using UnityEngine.Timeline;
 using Sirenix.OdinInspector;
+using System;
 
 /**********************************************
 * 模块名: HandAsset.cs
@@ -53,22 +54,32 @@ public class HandAsset : ScriptableObject
 
     #endregion 手牌通用属性
 
-    #region 主动手牌的属性
+    [Header("主动手牌的属性")]
+    public AttributesActive attributesActive;
+
+    [Header("被动手牌对玩家各属性的影响")]
+    public AttributesPassive attributesPassive;
+
+}
+
+
+[Serializable]
+public class AttributesActive {
 
     [Header("主动手牌造成的攻击力伤害")]
     public int damage;
 
     [Header("主动手牌提供的防御减伤值")]
     public int defense;
-    
-    #endregion 主动手牌的属性
+}
 
-    #region 被动手牌的属性
+
+[Serializable]
+public class AttributesPassive {
 
     [Header("被动手牌对玩家力量的影响值")]
     public int strengthInfluence;
 
-    [Range(-10,10)]
     [Header("被动手牌对玩家敏捷的影响值")]
     public int dexterityInfluence;
 
@@ -83,6 +94,5 @@ public class HandAsset : ScriptableObject
 
     [Header("被动手牌对玩家魅力的影响值")]
     public int charismaInfluence;
-
-    #endregion 被动手牌的属性
 }
+

@@ -12,7 +12,7 @@ using Sirenix.OdinInspector;
 public class PlayerController : MonoBehaviour
 {
 
-    private static PlayerController Instance;
+    public static PlayerController Instance;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].strength;
+        return players[playerIndex].attributes.strength;
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].dexterity;
+        return players[playerIndex].attributes.dexterity;
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].constitution;
+        return players[playerIndex].attributes.constitution;
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].intelligence;
+        return players[playerIndex].attributes.intelligence;
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].widom;
+        return players[playerIndex].attributes.widom;
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].charisma;
+        return players[playerIndex].attributes.charisma;
     }
 
     /// <summary>
@@ -174,12 +174,12 @@ public class PlayerController : MonoBehaviour
         List<int> handIndexs = handController.GetHandsOfPlayer(playerIndex);
         foreach(int handIndex in handIndexs)
         {
-            players[playerIndex].strength += handController.handAssets[handIndex].strengthInfluence;
-            players[playerIndex].dexterity += handController.handAssets[handIndex].dexterityInfluence;
-            players[playerIndex].constitution += handController.handAssets[handIndex].constitutionInfluence;
-            players[playerIndex].intelligence += handController.handAssets[handIndex].intelligenceInfluence;
-            players[playerIndex].widom += handController.handAssets[handIndex].widomInfluence;
-            players[playerIndex].charisma += handController.handAssets[handIndex].charismaInfluence;
+            players[playerIndex].attributes.strength += handController.handAssets[handIndex].attributesPassive.strengthInfluence;
+            players[playerIndex].attributes.dexterity += handController.handAssets[handIndex].attributesPassive.dexterityInfluence;
+            players[playerIndex].attributes.constitution += handController.handAssets[handIndex].attributesPassive.constitutionInfluence;
+            players[playerIndex].attributes.intelligence += handController.handAssets[handIndex].attributesPassive.intelligenceInfluence;
+            players[playerIndex].attributes.widom += handController.handAssets[handIndex].attributesPassive.widomInfluence;
+            players[playerIndex].attributes.charisma += handController.handAssets[handIndex].attributesPassive.charismaInfluence;
         }
     }
 

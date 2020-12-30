@@ -119,7 +119,7 @@ public class HandController : MonoBehaviour
     {
         if (!IsHandIn(handIndex))
             return 0;
-        return handAssets[handIndex].damage;
+        return handAssets[handIndex].attributesActive.damage;
     }
 
     /// <summary>
@@ -131,7 +131,7 @@ public class HandController : MonoBehaviour
     {
         if (!IsHandIn(handName))
             return 0;
-        return handAssets[GetIndex(handName)].damage;
+        return handAssets[GetIndex(handName)].attributesActive.damage;
     }
 
     /// <summary>
@@ -143,7 +143,7 @@ public class HandController : MonoBehaviour
     {
         if (!IsHandIn(handIndex))
             return 0;
-        return handAssets[handIndex].defense;
+        return handAssets[handIndex].attributesActive.defense;
     }
 
     /// <summary>
@@ -155,7 +155,7 @@ public class HandController : MonoBehaviour
     {
         if (!IsHandIn(handName))
             return 0;
-        return handAssets[GetIndex(handName)].defense;
+        return handAssets[GetIndex(handName)].attributesActive.defense;
     }
 
     /// <summary>
@@ -214,8 +214,8 @@ public class HandController : MonoBehaviour
 
 
             //卡牌主动属性的文本内容
-            string damageText = "攻击力:" + handAsset.damage.ToString();
-            string defenseText = "防御力:" + handAsset.defense.ToString();
+            string damageText = "攻击力:" + handAsset.attributesActive.damage.ToString();
+            string defenseText = "防御力:" + handAsset.attributesActive.defense.ToString();
             float activePosY = namePosY - intervalY * 2;     //主动文本的y轴位置
             float damgePosX = posXBegin;      //伤害数值的x轴位置
             float defensePosX = posXBegin + intervalX + 10;  //防御数值的x轴位置
@@ -223,12 +223,12 @@ public class HandController : MonoBehaviour
             uiSet.CreateText("防御力数值", defenseText, new Vector3(defensePosX, activePosY, 0), 30, FontStyle.Bold, 1, 200, imagObj.transform);
 
             //卡牌被动属性的文本内容
-            string strText = "力量:" + handAsset.strengthInfluence.ToString();
-            string dexText = "敏捷:" + handAsset.dexterityInfluence.ToString();
-            string conText = "体格:" + handAsset.constitutionInfluence.ToString();
-            string intText = "智力:" + handAsset.intelligenceInfluence.ToString();
-            string widText = "感知:" + handAsset.widomInfluence.ToString();
-            string chaText = "魅力:" + handAsset.charismaInfluence.ToString();
+            string strText = "力量:" + handAsset.attributesPassive.strengthInfluence.ToString();
+            string dexText = "敏捷:" + handAsset.attributesPassive.dexterityInfluence.ToString();
+            string conText = "体格:" + handAsset.attributesPassive.constitutionInfluence.ToString();
+            string intText = "智力:" + handAsset.attributesPassive.intelligenceInfluence.ToString();
+            string widText = "感知:" + handAsset.attributesPassive.widomInfluence.ToString();
+            string chaText = "魅力:" + handAsset.attributesPassive.charismaInfluence.ToString();
             float passivePosY = activePosY - intervalY;
             float strPosX = posXBegin;
             float dexPosX = posXBegin + intervalX;

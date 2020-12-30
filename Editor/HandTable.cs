@@ -52,28 +52,28 @@ public class HandTable
         public string 手牌名称 { get { return this.handAsset.handName; } set { this.handAsset.handName = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector,ProgressBar(-20,20)]
-        public int 伤害 { get { return this.handAsset.damage; } set { this.handAsset.damage = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 伤害 { get { return this.handAsset.attributesActive.damage; } set { this.handAsset.attributesActive.damage = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 防御 { get { return this.handAsset.defense; } set { this.handAsset.defense = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 防御 { get { return this.handAsset.attributesActive.defense; } set { this.handAsset.attributesActive.defense = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 力量 { get { return this.handAsset.strengthInfluence; } set { this.handAsset.strengthInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 力量 { get { return this.handAsset.attributesPassive.strengthInfluence; } set { this.handAsset.attributesPassive.strengthInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 敏捷 { get { return this.handAsset.dexterityInfluence; } set { this.handAsset.dexterityInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 敏捷 { get { return this.handAsset.attributesPassive.dexterityInfluence; } set { this.handAsset.attributesPassive.dexterityInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 体格 { get { return this.handAsset.constitutionInfluence; } set { this.handAsset.constitutionInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 体格 { get { return this.handAsset.attributesPassive.constitutionInfluence; } set { this.handAsset.attributesPassive.constitutionInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 智力 { get { return this.handAsset.intelligenceInfluence; } set { this.handAsset.intelligenceInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 智力 { get { return this.handAsset.attributesPassive.intelligenceInfluence; } set { this.handAsset.attributesPassive.intelligenceInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 感知 { get { return this.handAsset.widomInfluence; } set { this.handAsset.widomInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 感知 { get { return this.handAsset.attributesPassive.widomInfluence; } set { this.handAsset.attributesPassive.widomInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
 
         [ShowInInspector, ProgressBar(-20, 20)]
-        public int 魅力 { get { return this.handAsset.charismaInfluence; } set { this.handAsset.charismaInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
+        public int 魅力 { get { return this.handAsset.attributesPassive.charismaInfluence; } set { this.handAsset.attributesPassive.charismaInfluence = value; EditorUtility.SetDirty(this.handAsset); } }
 
     }
 

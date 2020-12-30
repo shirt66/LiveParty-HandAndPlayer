@@ -11,8 +11,15 @@ using UnityEngine.UI;
 
 public class UISet : MonoBehaviour
 {
+    public static UISet Instance;
+
     private Canvas uiCanvas;
-    
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         uiCanvas = GetComponent<Canvas>();
@@ -175,6 +182,24 @@ public class UISet : MonoBehaviour
     }
 
     /// <summary>
+    /// 在已有Canvas中的物体下创建文本
+    /// </summary>
+    /// <param name="name">文本名称</param>
+    /// <param name="text">文本内容</param>
+    /// <param name="position">文本位置</param>
+    /// <param name="fontSize">字体大小</param>
+    /// <param name="fontStyle">字体形式</param>
+    /// <param name="lineSpace">行间距</param>
+    /// <param name="width">每行的宽度</param>
+    /// <param name="parent">文本的父物体</param>
+    public void CreateText(string name, string text, Vector3 position, int fontSize, FontStyle fontStyle, float lineSpace, float width, Transform parent,float yRotation)
+    {
+        GameObject textObj = CreateTextAndReturn(name, text, position, fontSize, fontStyle, lineSpace, width, parent);
+        if (yRotation != 0)
+            textObj.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
+    /// <summary>
     /// 在uiCanvas下创建文本并返回游戏物体，默认文本类型为Arial
     /// </summary>
     /// <param name="name">文本名称</param>
@@ -202,6 +227,8 @@ public class UISet : MonoBehaviour
         textObj.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         recTrans.pivot = new Vector2(0, 1);
 
+        textObj.transform.localScale = new Vector3(1, 1, 1);
+
         return textObj;
     }
 
@@ -222,6 +249,28 @@ public class UISet : MonoBehaviour
         GameObject textObj = CreateTextAndReturn(name, text, position, fontSize, fontStyle, lineSpace, width);
         textObj.transform.SetParent(parent);
         textObj.GetComponent<RectTransform>().localPosition = position;
+        return textObj;
+    }
+
+    /// <summary>
+    /// 在已有Canvas中的物体下创建文本并返回游戏物体，默认文本类型为Arial
+    /// </summary>
+    /// <param name="name">文本名称</param>
+    /// <param name="text">文本内容</param>
+    /// <param name="position">文本位置</param>
+    /// <param name="fontSize">字体大小</param>
+    /// <param name="fontStyle">字体形式</param>
+    /// <param name="lineSpace">行间距</param>
+    /// <param name="width">每行的宽度</param>
+    /// <param name="parent">文本的父物体</param>
+    /// <returns>文本游戏物体</returns>
+    public GameObject CreateTextAndReturn(string name, string text, Vector3 position, int fontSize, FontStyle fontStyle, float lineSpace, float width, Transform parent,float yRotation)
+    {
+        GameObject textObj = CreateTextAndReturn(name, text, position, fontSize, fontStyle, lineSpace, width);
+        textObj.transform.SetParent(parent);
+        textObj.GetComponent<RectTransform>().localPosition = position;
+        if(yRotation!=0)
+            textObj.transform.rotation = Quaternion.Euler(0, yRotation, 0);
         return textObj;
     }
 
