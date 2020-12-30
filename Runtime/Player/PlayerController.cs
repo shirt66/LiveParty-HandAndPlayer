@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPlayerIn(playerIndex))
             return 0;
-        return players[playerIndex].attributes.widom;
+        return players[playerIndex].attributes.wisdom;
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
             players[playerIndex].attributes.dexterity += handController.handAssets[handIndex].attributesPassive.dexterityInfluence;
             players[playerIndex].attributes.constitution += handController.handAssets[handIndex].attributesPassive.constitutionInfluence;
             players[playerIndex].attributes.intelligence += handController.handAssets[handIndex].attributesPassive.intelligenceInfluence;
-            players[playerIndex].attributes.widom += handController.handAssets[handIndex].attributesPassive.widomInfluence;
+            players[playerIndex].attributes.wisdom += handController.handAssets[handIndex].attributesPassive.widomInfluence;
             players[playerIndex].attributes.charisma += handController.handAssets[handIndex].attributesPassive.charismaInfluence;
         }
     }

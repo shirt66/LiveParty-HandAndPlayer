@@ -404,7 +404,7 @@ public class HandController : MonoBehaviour
     /// 显示某一玩家的所有卡牌图标
     /// </summary>
     /// <param name="playerIndex">玩家编号</param>
-    public void ShowAllHandsIcon(int playerIndex)
+    public void ShowAllHandsIcon(int playerIndex, Transform transform)
     {
         Debug.Log("显示所有卡牌图标");
         if (!IsPlayerIn(playerIndex))
@@ -416,8 +416,8 @@ public class HandController : MonoBehaviour
         {
             //每次生成时都将现有ui清除后再生成
             HideAllHandsIcon();
-            Canvas uiCanvas = FindObjectOfType<Canvas>();
-            UISet uiSet = FindObjectOfType<UISet>();
+            //Canvas uiCanvas = FindObjectOfType<Canvas>();
+            //UISet uiSet = FindObjectOfType<UISet>();
             List<int> handIndexs = GetHandsOfPlayer(playerIndex);
             //用于存不同值的handIndex及其数量
             Dictionary<int, int> handIndexsType = new Dictionary<int, int>();
@@ -450,11 +450,11 @@ public class HandController : MonoBehaviour
                 //生成游戏中的图标
                 Texture2D texture = handIcons[i] as Texture2D;
                 Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                uiSet.CreateImage("Icon" + i, sprite, iconPos, 100, 100);
+                UISet.Instance.CreateImage("Icon" + i, sprite, iconPos, transform, 100, 100);
 
                 //生成图标下的技术文本
                 string handText = handCounts[i].ToString();
-                uiSet.CreateText("TextCount" + i, handText, textPos, 24, FontStyle.Bold, 1, 30);
+                UISet.Instance.CreateText("TextCount" + i, handText, textPos, 24, FontStyle.Bold, 1, 30, transform);
             }
         }
     }

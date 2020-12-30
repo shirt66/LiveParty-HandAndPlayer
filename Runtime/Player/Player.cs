@@ -59,7 +59,7 @@ public class Attributes
     public int intelligence;
 
     [Header("玩家当前感知")]
-    public int widom;
+    public int wisdom;
 
     [Header("玩家但前魅力")]
     public int charisma;

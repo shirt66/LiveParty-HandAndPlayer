@@ -33,7 +33,7 @@ public class PlayerInput : MonoBehaviour
             handController.AddHandToPlayer(0, 1);
             Debug.Log("添加卡牌完成");
             playerController.ChangeAttributes();
-            handController.ShowAllHandsIcon(0);
+            //handController.ShowAllHandsIcon(0);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
