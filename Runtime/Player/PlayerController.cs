@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
         }
 
         List<int> handIndexs = handController.GetHandsOfPlayer(playerIndex);
-        foreach(int handIndex in handIndexs)
+        foreach (int handIndex in handIndexs)
         {
             players[playerIndex].attributes.strength += handController.handAssets[handIndex].attributesPassive.strengthInfluence;
             players[playerIndex].attributes.dexterity += handController.handAssets[handIndex].attributesPassive.dexterityInfluence;
@@ -182,6 +182,133 @@ public class PlayerController : MonoBehaviour
             players[playerIndex].attributes.charisma += handController.handAssets[handIndex].attributesPassive.charismaInfluence;
         }
     }
+
+    /// <summary>
+    /// 根据判定类型获取改判定属性值最大的玩家编号
+    /// </summary>
+    /// <param name="judgeType">判定类型</param>
+    /// <returns>玩家编号</returns>
+    public int GetMaxAttribute(string judgeType)
+    {
+        int index;
+        switch (judgeType)
+        {
+            case "Strength":
+                index = GetMaxStrength();
+                break;
+            case "Dexterity":
+                index =GetMaxDexterity();
+                break;
+            case "Constitution":
+                index = GetMaxConstitution();
+                break;
+            case "Intelligence":
+                index = GetMaxIntelligence();
+                break;
+            case "Wisdom":
+                index = GetMaxWisdom();
+                break;
+            case "Charisma":
+                index = GetMaxCharisma();
+                break;
+            default:
+                index = -1;
+                Debug.LogError("不存在名为" + judgeType + "的判定");
+                break;
+        }
+        return index;
+    }
+
+    /// <summary>
+    /// 获取玩家中力量值最大的玩家编号
+    /// </summary>
+    /// <returns>玩家编号</returns>
+    private int GetMaxStrength()
+    {
+        int maxIndex = 0;
+        for (int i = 1; i < players.ToArray().Length; i++)
+        {
+            if (players[i].attributes.strength > players[maxIndex].attributes.strength)
+                maxIndex = i;
+        }
+        return maxIndex;
+    }
+
+    /// <summary>
+    /// 获取玩家中敏捷值最大的玩家编号
+    /// </summary>
+    /// <returns>玩家编号</returns>
+    private int GetMaxDexterity()
+    {
+        int maxIndex = 0;
+        for(int i = 1; i < players.ToArray().Length; i++)
+        {
+            if (players[i].attributes.dexterity > players[maxIndex].attributes.dexterity)
+                maxIndex = i;
+        }
+        return maxIndex;
+    }
+
+    /// <summary>
+    /// 获取玩家中体格值最大的玩家编号
+    /// </summary>
+    /// <returns>玩家编号</returns>
+    private int GetMaxConstitution()
+    {
+        int maxIndex = 0;
+        for (int i = 1; i < players.ToArray().Length; i++)
+        {
+            if (players[i].attributes.constitution > players[maxIndex].attributes.constitution)
+                maxIndex = i;
+        }
+        return maxIndex;
+    }
+
+    /// <summary>
+    /// 获取玩家中智力值最大的玩家编号
+    /// </summary>
+    /// <returns>玩家编号</returns>
+    private int GetMaxIntelligence()
+    {
+        int maxIndex = 0;
+        for (int i = 1; i < players.ToArray().Length; i++)
+        {
+            if (players[i].attributes.intelligence > players[maxIndex].attributes.intelligence)
+                maxIndex = i;
+        }
+        return maxIndex;
+    }
+
+    /// <summary>
+    /// 获取玩家中感知值最大的玩家编号
+    /// </summary>
+    /// <returns>玩家编号</returns>
+    private int GetMaxWisdom()
+    {
+        int maxIndex = 0;
+        for (int i = 1; i < players.ToArray().Length; i++)
+        {
+            if (players[i].attributes.wisdom > players[maxIndex].attributes.wisdom)
+                maxIndex = i;
+        }
+        return maxIndex;
+    }
+
+    /// <summary>
+    /// 获取玩家中魅力值最大的玩家编号
+    /// </summary>
+    /// <returns>玩家编号</returns>
+    private int GetMaxCharisma()
+    {
+        int maxIndex = 0;
+        for (int i = 1; i < players.ToArray().Length; i++)
+        {
+            if (players[i].attributes.charisma > players[maxIndex].attributes.charisma)
+                maxIndex = i;
+        }
+        return maxIndex;
+    }
+
 
     #endregion 玩家属性值相关的接口
 

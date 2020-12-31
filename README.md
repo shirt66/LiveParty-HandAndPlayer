@@ -57,6 +57,7 @@ GetWidom：通过玩家编号获取其感知值
 GetCharisma：通过玩家编号获取其魅力值
 ChangeAttribute：根据特定玩家编号的所有手牌改变其所有属性值
 ChangeAttributes：根据玩家手上的手牌更新玩家的六维属性
+GetMaxAttribute：根据判定类型获取改判定属性值最大的玩家编号
 
 
 内容4.玩家视线交互操作的控制脚本PlayerViewControl
