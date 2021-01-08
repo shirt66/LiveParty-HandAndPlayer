@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="playerIndex">玩家编号</param>
     /// <returns>感知值,若玩家不存在返回0</returns>
-    public int GetWidom(int playerIndex)
+    public int GetWisdom(int playerIndex)
     {
         if (!isPlayerIn(playerIndex))
             return 0;

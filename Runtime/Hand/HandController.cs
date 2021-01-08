@@ -252,6 +252,8 @@ public class HandController : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
+
     [Button("将所有手牌存入容器")]
     /// <summary>
     /// 获取文件夹中的所有手牌文件并存入容器
@@ -267,6 +269,8 @@ public class HandController : MonoBehaviour
         handAssets.Clear();
         paths.ForEach(p => handAssets.Add(AssetDatabase.LoadAssetAtPath(p, typeof(HandAsset)) as HandAsset));
     }
+
+#endif
 
     [Button("清除容器中所有手牌")]
     /// <summary>
@@ -457,6 +461,23 @@ public class HandController : MonoBehaviour
                 UISet.Instance.CreateText("TextCount" + i, handText, textPos, 24, FontStyle.Bold, 1, 30, transform);
             }
         }
+    }
+
+    /// <summary>
+    /// 消除玩家的所有卡牌图标, transform为玩家的屏幕canvas
+    /// </summary>
+    public void HideAllHandsIcon(Transform transform)
+    {
+        List<GameObject> destroyObjects = new List<GameObject>();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).name.Contains("Icon"))
+                destroyObjects.Add(transform.GetChild(i).gameObject);
+        }
+
+        foreach (GameObject gameObject in destroyObjects)
+            Destroy(gameObject);
+        destroyObjects.Clear();
     }
 
     /// <summary>
